@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI & Data Science Portfolio</title>
+    <title>Arokiya Nithish J Portfolio</title>
+    <link rel="icon" type="image/png" href="R (1).png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -429,10 +430,13 @@
             backdrop-filter: blur(5px);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
         
         .project-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) rotateX(5deg);
             box-shadow: 0 15px 30px rgba(0, 168, 255, 0.2);
             border-color: var(--primary);
         }
@@ -596,10 +600,13 @@
             transition: all 0.3s;
             border: 1px solid rgba(100, 255, 218, 0.1);
             backdrop-filter: blur(5px);
+            cursor: pointer;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
         
         .cert-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) rotateY(5deg);
             box-shadow: 0 10px 25px rgba(0, 168, 255, 0.2);
             border-color: var(--primary);
         }
@@ -819,122 +826,165 @@
             opacity: 0.1;
         }
         
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column-reverse;
-                text-align: center;
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(10, 25, 47, 0.95);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            backdrop-filter: blur(8px);
+        }
+        
+        .modal.show {
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background-color: var(--dark);
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.9);
+            width: 80%;
+            max-width: 900px;
+            position: relative;
+            transform: translateY(-30px) scale(0.95);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            border: 1px solid var(--highlight);
+            overflow: hidden;
+        }
+        
+        .modal.show .modal-content {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.05) 0%, rgba(0, 168, 255, 0.05) 100%);
+            z-index: -1;
+        }
+        
+        .close {
+            color: var(--light);
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .close:hover {
+            color: var(--primary);
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        .modal-title {
+            color: var(--primary);
+            margin-top: 0;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+            padding-bottom: 15px;
+            animation: slideInLeft 0.6s ease-out both;
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
             }
-            
-            .hero-text {
-                padding-right: 0;
-                margin-top: 50px;
-            }
-            
-            .about-content {
-                flex-direction: column;
-            }
-            
-            .timeline::before {
-                left: 30px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-                text-align: left;
-            }
-            
-            .timeline-item:nth-child(even) {
-                left: 0;
-            }
-            
-            .timeline-item:nth-child(odd)::after,
-            .timeline-item:nth-child(even)::after {
-                left: 20px;
-            }
-            
-            .cube-container {
-                display: none;
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
         
-        @media (max-width: 768px) {
-            nav {
-                padding: 20px;
+        .modal-description {
+            margin-bottom: 25px;
+            line-height: 1.8;
+            color: rgba(204, 214, 246, 0.8);
+            animation: fadeIn 0.8s ease-out 0.3s both;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
             }
-            
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background-color: var(--dark);
-                flex-direction: column;
-                align-items: center;
-                padding-top: 40px;
-                transition: left 0.3s;
-                backdrop-filter: blur(10px);
-            }
-            
-            .nav-links.active {
-                left: 0;
-            }
-            
-            .nav-links li {
-                margin: 15px 0;
-            }
-            
-            .hamburger {
-                display: block;
-                font-size: 1.5rem;
-            }
-            
-            .hero {
-                padding: 0 20px;
-            }
-            
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-            
-            .section {
-                padding: 70px 20px;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
+            to {
+                opacity: 1;
             }
         }
         
-        @media (max-width: 480px) {
-            .btn {
-                display: block;
-                width: 100%;
-                margin-bottom: 15px;
-                margin-right: 0;
+        .certificate-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+            animation: float 6s ease-in-out infinite;
+            border: 1px solid var(--highlight);
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0.5deg);
             }
-            
-            .project-links {
-                flex-direction: column;
-            }
-            
-            .profile-img-container {
-                width: 250px;
-                height: 250px;
+            50% {
+                transform: translateY(-15px) rotate(-0.5deg);
             }
         }
-    </style>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI & Data Science Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
-    <style>
-        /* Previous styles remain the same until the Research section */
+        
+        .certificate-image:hover {
+            animation: none;
+            transform: translateY(-5px);
+        }
+        
+        .project-details {
+            background-color: rgba(100, 255, 218, 0.05);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 3px solid var(--primary);
+            animation: slideInRight 0.6s ease-out 0.2s both;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .project-details h3 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        
+        .project-details p {
+            margin-bottom: 0;
+            color: rgba(204, 214, 246, 0.7);
+        }
         
         /* Research & Patents Section */
         .research-section {
@@ -982,10 +1032,13 @@
             backdrop-filter: blur(5px);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
         
         .research-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) rotateX(5deg);
             box-shadow: 0 10px 25px rgba(0, 168, 255, 0.2);
             border-color: var(--primary);
         }
@@ -1107,7 +1160,184 @@
             font-size: 0.8rem;
         }
         
-        /* Rest of your existing styles remain the same */
+        /* Glow effect on hover */
+        .glow-on-hover {
+            position: relative;
+        }
+        
+        .glow-on-hover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 20px 5px rgba(100, 255, 218, 0.3);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .glow-on-hover:hover::after {
+            opacity: 1;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                margin-top: 50px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after {
+                left: 20px;
+            }
+            
+            .cube-container {
+                display: none;
+            }
+            
+            .modal-content {
+                width: 90%;
+                padding: 30px;
+            }
+            
+            .certificate-image {
+                max-height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--dark);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: left 0.3s;
+                backdrop-filter: blur(10px);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hamburger {
+                display: block;
+                font-size: 1.5rem;
+            }
+            
+            .hero {
+                padding: 0 20px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 70px 20px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .research-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 15% auto;
+                padding: 25px;
+            }
+            
+            .certifications-container {
+                padding: 0 15px;
+                margin: 60px auto;
+            }
+            
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+            
+            .certificate-image {
+                max-height: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+                margin-right: 0;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+            
+            .profile-img-container {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .cert-card {
+                padding: 25px;
+            }
+            
+            .cert-card h2 {
+                font-size: 1.3rem;
+            }
+            
+            .certificate-image {
+                max-height: 250px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1173,11 +1403,11 @@
         <div class="about-content">
             <div class="about-text">
                 <h3>Who am I?</h3>
-                <p style="text-align: justify;">🚀 Hello Guys!I am Arokiya Nithish J, a passionate AI and Data Science student at Vel Tech University, with a strong foundation in Python, C, and Java. I specialize in AI development, machine learning, deep learning, and embedded systems, proudly maintaining a CGPA of 8.4%. I’m deeply passionate about AI Engineer, entrepreneurship and leadership, constantly driving innovation and bringing fresh ideas to solve real-world problems.
+                <p style="text-align: justify;">🚀 Hello Guys!I am Arokiya Nithish J, a passionate AI and Data Science student at Vel Tech University, with a strong foundation in Python, C, and Java. I specialize in AI development, machine learning, deep learning, and embedded systems, proudly maintaining a CGPA of 8.4%. I'm deeply passionate about AI Engineer, entrepreneurship and leadership, constantly driving innovation and bringing fresh ideas to solve real-world problems.</p>
 
-<p style="text-align: justify;">My academic journey is filled with hands-on projects in AI, data science, and IoT, coupled with active involvement in project management clubs, innovation leadership workshops, and technology communities. I further enhanced my technical capabilities through an intensive Python course and a valuable internship at the Center of Excellence in IoT at Vel Tech University, where I explored cutting-edge technologies.</p>
+                <p style="text-align: justify;">My academic journey is filled with hands-on projects in AI, data science, and IoT, coupled with active involvement in project management clubs, innovation leadership workshops, and technology communities. I further enhanced my technical capabilities through an intensive Python course and a valuable internship at the Center of Excellence in IoT at Vel Tech University, where I explored cutting-edge technologies.</p>
 
-<p style="text-align: justify;">I am a competitive coder, a research paper presenter, and currently working towards publishing innovation-driven research in reputed journals like IEEE Xplore. Beyond technical achievements, I am an AI content creator on YouTube, a motivational stage speaker, and a firm believer in continuous learning and knowledge sharingLet's connect and create impactful solutions together! 😊🎉🎈.</p>
+                <p style="text-align: justify;">I am a competitive coder, a research paper presenter, and currently working towards publishing innovation-driven research in reputed journals like IEEE Xplore. Beyond technical achievements, I am an AI content creator on YouTube, a motivational stage speaker, and a firm believer in continuous learning and knowledge sharingLet's connect and create impactful solutions together! 😊🎉🎈.</p>
 
                 <a href="#" class="btn" download>Download Resume</a>
             </div>
@@ -1253,12 +1483,6 @@
 <div class="skill-item">
     <i class="fas fa-cloud-upload-alt"></i> Cloud Services
 </div>
-
-
-
-
-
-
                 </div>
             </div>
         </div>
@@ -1274,7 +1498,7 @@
         </div>
         <div class="projects-grid">
             <!-- Project 1 -->
-            <div class="project-card">
+            <div class="project-card glow-on-hover" onclick="openModal('project1')">
                 <img src="https://via.placeholder.com/600x400?text=AI+Diagnostic+System" alt="AI Diagnostic System" class="project-img">
                 <div class="project-info">
                     <h3>Medical Diagnosis AI</h3>
@@ -1287,7 +1511,7 @@
             </div>
             
             <!-- Project 2 -->
-            <div class="project-card">
+            <div class="project-card glow-on-hover" onclick="openModal('project2')">
                 <img src="https://via.placeholder.com/600x400?text=Stock+Market+Predictor" alt="Stock Market Predictor" class="project-img">
                 <div class="project-info">
                     <h3>Stock Prediction Model</h3>
@@ -1300,7 +1524,7 @@
             </div>
             
             <!-- Project 3 -->
-            <div class="project-card">
+            <div class="project-card glow-on-hover" onclick="openModal('project3')">
                 <img src="https://via.placeholder.com/600x400?text=Autonomous+Driving+Sim" alt="Autonomous Driving Sim" class="project-img">
                 <div class="project-info">
                     <h3>Self-Driving Car Sim</h3>
@@ -1313,7 +1537,7 @@
             </div>
             
             <!-- Project 4 -->
-            <div class="project-card">
+            <div class="project-card glow-on-hover" onclick="openModal('project4')">
                 <img src="https://via.placeholder.com/600x400?text=Chatbot+with+NLP" alt="Chatbot with NLP" class="project-img">
                 <div class="project-info">
                     <h3>Advanced NLP Chatbot</h3>
@@ -1355,34 +1579,61 @@ My academic journey is highlighted by hands-on projects, including AI chatbots, 
     <!-- Certifications -->
     <section class="section" id="certifications">
         <div class="section-title">
-            <h2>Certifications</h2>
+            <h2>Certifications & Achievements</h2>
         </div>
         <div class="certs-grid">
             <!-- Cert 1 -->
-            <div class="cert-card">
-                <h3> Java Programming Fundamentals</h3>
+            <div class="cert-card glow-on-hover" onclick="openModal('cert1')">
+                <h3>Infosys Springboard: Java Programming Fundamentals Certificate Course</h3>
                 <p>Demonstrates proficiency in building and training models using TensorFlow for computer vision, NLP, and time series.</p>
-                <a href="Nithish Infosys Springboard Certificate1.pdf" target="_blank">
-        View Certificate <i class="fas fa-external-link-alt"></i></a>
+                <div class="cert-marker">View Certificate <i class="fas fa-external-link-alt"></i></div>
             </div>
             
             <!-- Cert 2 -->
-            <div class="cert-card">
-                <h3>CompTIA IT Fundamentals: Operating Systems</h3>
+            <div class="cert-card glow-on-hover" onclick="openModal('cert2')">
+                <h3>CompTIA IT Fundamentals: Operating Systems – Certificate Course Provided by Infosys</h3>
                 <p>Validates ability to build, train, tune, and deploy machine learning models on AWS.</p>
-                <a href="os.pdf" target="_blank">
-                    View Certificate <i class="fas fa-external-link-alt"></i></a>
+                <div class="cert-marker">View Certificate <i class="fas fa-external-link-alt"></i></div>
             </div>
             
             <!-- Cert 3 -->
-            <div class="cert-card">
-                <h3>Deep Learning Specialization</h3>
+            <div class="cert-card glow-on-hover" onclick="openModal('cert3')">
+                <h3>"Mendix Rapid Developer" Certification Awarded by Mendix (Low-Code Application Development Platform)</h3>
                 <p>Mastery of neural networks, CNNs, RNNs, LSTM, Adam, Dropout, BatchNorm, and more.</p>
-                <a href="#">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                <div class="cert-marker">View Certificate <i class="fas fa-external-link-alt"></i></div>
+            </div>
+
+            <div class="cert-card glow-on-hover" onclick="openModal('cert4')">
+                <h3>"Full Stack Development" Webinar Organized by Innovate Technologies</h3>
+                <p>Mastery of neural networks, CNNs, RNNs, LSTM, Adam, Dropout, BatchNorm, and more.</p>
+                <div class="cert-marker">View Certificate <i class="fas fa-external-link-alt"></i></div>
+            </div>
+
+            <div class="cert-card glow-on-hover" onclick="openModal('cert5')">
+                <h3>Paper Presentation on "AI-Powered Intelligent Traffic Systems", Panimalar Engineering College</h3>
+                <p>Mastery of neural networks, CNNs, RNNs, LSTM, Adam, Dropout, BatchNorm, and more.</p>
+                <div class="cert-marker">View Certificate <i class="fas fa-external-link-alt"></i></div>
+            </div>
+
+            <div class="cert-card glow-on-hover" onclick="openModal('cert6')">
+                <h3>Project Presentation on "Advanced Automatic Vehicle Parking System" at ISTE Tamil Nadu Section Convention, P.S.R. Engineering College</h3>
+                <p>Mastery of neural networks, CNNs, RNNs, LSTM, Adam, Dropout, BatchNorm, and more.</p>
+                <div class="cert-marker">View Certificate <i class="fas fa-external-link-alt"></i></div>
+            </div>
+
+            <div class="cert-card glow-on-hover" onclick="openModal('cert7')">
+                <h3>"Became a Successful Leader" – Leadership Workshop, Vel Tech University</h3>
+                <p>Mastery of neural networks, CNNs, RNNs, LSTM, Adam, Dropout, BatchNorm, and more.</p>
+                <div class="cert-marker">View Certificate <i class="fas fa-external-link-alt"></i></div>
+            </div>
+
+            <div class="cert-card glow-on-hover" onclick="openModal('cert8')">
+                <h3>Diploma in Office Automation Awarded by Bharat Sevak Samaj</h3>
+                <p>Mastery of neural networks, CNNs, RNNs, LSTM, Adam, Dropout, BatchNorm, and more.</p>
+                <div class="cert-marker">View Certificate <i class="fas fa-external-link-alt"></i></div>
             </div>
         </div>
     </section>
-<!-- Previous HTML remains the same until before Contact section -->
 
     <!-- Research & Patents Section -->
     <section class="research-section" id="research">
@@ -1391,7 +1642,7 @@ My academic journey is highlighted by hands-on projects, including AI chatbots, 
         </div>
         <div class="research-container">
             <!-- Research Paper 1 -->
-            <div class="research-card">
+            <div class="research-card glow-on-hover" onclick="openModal('research1')">
                 <div class="research-header">
                     <h3 class="research-title">Neural Architecture Search for Edge Devices</h3>
                     <span class="research-type">Research Paper</span>
@@ -1414,7 +1665,7 @@ My academic journey is highlighted by hands-on projects, including AI chatbots, 
             </div>
             
             <!-- Patent 1 -->
-            <div class="research-card patent">
+            <div class="research-card patent glow-on-hover" onclick="openModal('patent1')">
                 <div class="research-header">
                     <h3 class="research-title">Real-Time Anomaly Detection System</h3>
                     <span class="research-type">Patent</span>
@@ -1436,7 +1687,7 @@ My academic journey is highlighted by hands-on projects, including AI chatbots, 
             </div>
             
             <!-- Research Paper 2 -->
-            <div class="research-card">
+            <div class="research-card glow-on-hover" onclick="openModal('research2')">
                 <div class="research-header">
                     <h3 class="research-title">Federated Learning for Healthcare</h3>
                     <span class="research-type">Research Paper</span>
@@ -1459,7 +1710,7 @@ My academic journey is highlighted by hands-on projects, including AI chatbots, 
             </div>
             
             <!-- Patent 2 -->
-            <div class="research-card patent">
+            <div class="research-card patent glow-on-hover" onclick="openModal('patent2')">
                 <div class="research-header">
                     <h3 class="research-title">Adaptive AI Security Protocol</h3>
                     <span class="research-type">Patent</span>
@@ -1482,9 +1733,6 @@ My academic journey is highlighted by hands-on projects, including AI chatbots, 
         </div>
     </section>
 
-    <!-- Contact Section and Footer remain the same -->
-
-
     <!-- Contact Section -->
     <section class="contact-section" id="contact">
         <div class="section-title">
@@ -1495,13 +1743,12 @@ My academic journey is highlighted by hands-on projects, including AI chatbots, 
         </div>
         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=arokiyanithishj@gmail.com" class="btn">Email Me</a>
         <div class="contact-links">
-            <a href="tel:+919876543210" class="contact-link"><i class="fas fa-phone"></i></a>
+            <a href="tel:+919444579181" class="contact-link"><i class="fas fa-phone"></i></a>
             <a href="https://www.linkedin.com/in/arokiya-nithishj/" class="contact-link"><i class="fab fa-linkedin-in"></i></a>
             <a href="https://github.com/ArokiyaNithish" class="contact-link"><i class="fab fa-github"></i></a>
             <a href="https://www.kaggle.com/arokiyanithishj" class="contact-link"><i class="fab fa-kaggle"></i></a>
-            <a href="#" class="contact-link"><i class="fab fa-google-scholar"></i></a>
-            
-            
+            <a href="https://www.hackerrank.com/profile/arokiyanithish_2" class="contact-link" target="_blank"><i class="fab fa-hackerrank"></i></a>
+            <a href="https://leetcode.com/u/Arokiya_Nithish/" class="contact-link" target="_blank"><i class="fas fa-code"></i></a>
         </div>
     </section>
 
@@ -1509,6 +1756,276 @@ My academic journey is highlighted by hands-on projects, including AI chatbots, 
     <footer>
         <p>&copy; 2023 AI Developer Portfolio. All rights reserved.</p>
     </footer>
+
+    <!-- Project Modals -->
+    <div id="project1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('project1')">&times;</span>
+            <h2 class="modal-title">Medical Diagnosis AI</h2>
+            <p class="modal-description">A deep learning system that analyzes medical images to detect early signs of diseases with 95% accuracy. This project involved developing a convolutional neural network (CNN) architecture specifically optimized for medical imaging tasks.</p>
+            
+            <div class="project-details">
+                <h3>Technical Details</h3>
+                <p>Built using TensorFlow and Keras with a custom CNN architecture. The model was trained on a dataset of 50,000 annotated medical images across 15 disease categories. Implemented data augmentation techniques to handle class imbalance and improve generalization. Deployed as a web service using Flask with a React frontend.</p>
+            </div>
+            
+            <img src="https://via.placeholder.com/800x500.png?text=Medical+Diagnosis+AI" alt="Medical Diagnosis AI" class="certificate-image">
+        </div>
+    </div>
+
+    <div id="project2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('project2')">&times;</span>
+            <h2 class="modal-title">Stock Prediction Model</h2>
+            <p class="modal-description">LSTM neural network that predicts stock market trends using historical data and sentiment analysis. The model combines quantitative financial data with qualitative news sentiment to improve prediction accuracy.</p>
+            
+            <div class="project-details">
+                <h3>Technical Details</h3>
+                <p>Developed using PyTorch with a bidirectional LSTM architecture. Integrated with Alpha Vantage API for historical stock data and NewsAPI for sentiment analysis. Achieved 87% accuracy in predicting 30-day price movements. Implemented a custom attention mechanism to weigh the importance of different time steps and news sentiment.</p>
+            </div>
+            
+            <img src="https://via.placeholder.com/800x500.png?text=Stock+Prediction+Model" alt="Stock Prediction Model" class="certificate-image">
+        </div>
+    </div>
+
+    <div id="project3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('project3')">&times;</span>
+            <h2 class="modal-title">Self-Driving Car Sim</h2>
+            <p class="modal-description">Reinforcement learning model that learns to navigate virtual environments using computer vision. The agent learns optimal driving policies through trial and error in a simulated environment.</p>
+            
+            <div class="project-details">
+                <h3>Technical Details</h3>
+                <p>Implemented using OpenAI Gym environment with PyTorch for the deep Q-learning network. Used a CNN to process visual input from the simulation. Achieved human-level performance after 1 million training steps. The model demonstrates robust performance across different weather conditions and lighting scenarios.</p>
+            </div>
+            
+            <img src="https://via.placeholder.com/800x500.png?text=Self-Driving+Car+Sim" alt="Self-Driving Car Sim" class="certificate-image">
+        </div>
+    </div>
+
+    <div id="project4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('project4')">&times;</span>
+            <h2 class="modal-title">Advanced NLP Chatbot</h2>
+            <p class="modal-description">Transformer-based chatbot that understands context and maintains natural conversations. The model can engage in multi-turn dialogues while maintaining context and personality.</p>
+            
+            <div class="project-details">
+                <h3>Technical Details</h3>
+                <p>Built using HuggingFace's Transformers library with a fine-tuned GPT-3 architecture. Trained on 10GB of conversational data from various domains. Implemented custom memory mechanisms to maintain conversation context. The model achieves 92% accuracy in intent recognition and 88% in context-aware response generation.</p>
+            </div>
+            
+            <img src="https://via.placeholder.com/800x500.png?text=Advanced+NLP+Chatbot" alt="Advanced NLP Chatbot" class="certificate-image">
+        </div>
+    </div>
+
+    <!-- Certificate Modals -->
+    <div id="cert1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cert1')">&times;</span>
+            <h2 class="modal-title">Infosys Springboard: Java Programming Fundamentals Certificate Course</h2>
+            <p class="modal-description">This certification demonstrates comprehensive proficiency in Java programming fundamentals, including object-oriented programming concepts, data structures, and algorithms. The course covered advanced topics in building and training models using TensorFlow for computer vision, natural language processing (NLP), and time series analysis.</p>
+            
+            <div class="project-details">
+                <h3>Related Project: Image Classification System</h3>
+                <p>Developed an image classification system using TensorFlow that achieved 95% accuracy on the test dataset. Implemented convolutional neural networks (CNNs) with data augmentation techniques to improve model robustness. The system can classify images across 100 different categories with high precision and was deployed using TensorFlow Serving for production use.</p>
+            </div>
+            
+            <img src="Nithish%20Infosys%20Springboard%20Certificate1.jpg" alt="Java Programming Certificate" style="width: 800px; height: 500px; border: 1px solid #ccc;">
+
+        </div>
+    </div>
+
+    <div id="cert2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cert2')">&times;</span>
+            <h2 class="modal-title">CompTIA IT Fundamentals: Operating Systems – Certificate Course Provided by Infosys</h2>
+            <p class="modal-description">This certification validates foundational knowledge of operating systems and the ability to build, train, tune, and deploy machine learning models on AWS. The course covered Linux and Windows system administration, cloud computing concepts, and practical AWS services like SageMaker, EC2, and Lambda.</p>
+            
+            <div class="project-details">
+                <h3>Related Project: AWS-based Recommendation System</h3>
+                <p>Built a movie recommendation system deployed on AWS using collaborative filtering algorithms. The system processed user ratings data stored in S3, trained models on SageMaker, and served recommendations through API Gateway and Lambda functions. Achieved 85% accuracy in predicting user preferences and reduced recommendation generation time by 60% compared to the previous system.</p>
+            </div>
+            
+            <img src="Nithish%20Infosys%20Springboard%20Certificate1.jpg" alt="Java Programming Certificate" style="width: 800px; height: 500px; border: 1px solid #ccc;">
+        </div>
+    </div>
+
+    <div id="cert3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cert3')">&times;</span>
+            <h2 class="modal-title">"Mendix Rapid Developer" Certification Awarded by Mendix</h2>
+            <p class="modal-description">This certification demonstrates mastery of low-code application development using the Mendix platform. The program covered full-stack development without extensive coding, focusing on rapid application deployment. Additionally, it included advanced topics in neural networks, CNNs, RNNs, LSTM architectures, and optimization techniques like Adam, Dropout, and Batch Normalization.</p>
+            
+            <div class="project-details">
+                <h3>Related Project: Inventory Management System</h3>
+                <p>Developed a comprehensive inventory management system using Mendix that reduced processing time by 40%. Integrated machine learning components for demand forecasting using LSTM networks with Dropout and BatchNorm layers to prevent overfitting. The system handles over 10,000 inventory items with real-time tracking and automated reordering capabilities, resulting in a 30% reduction in stockouts.</p>
+            </div>
+            
+            <img src="mendix.jpg" alt="Mendix Rapid Developer Certificate" style="width: 800px; height: 500px; border: 1px solid #ccc;">
+
+        </div>
+    </div>
+
+    <div id="cert4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cert4')">&times;</span>
+            <h2 class="modal-title">"Full Stack Development" Webinar Organized by Innovate Technologies</h2>
+            <p class="modal-description">This webinar provided comprehensive training in full stack development, covering both frontend and backend technologies. The program included hands-on projects building complete web applications with modern frameworks.</p>
+            
+            <div class="project-details">
+                <h3>Related Project: E-commerce Platform</h3>
+                <p>Developed a full-featured e-commerce platform using React for the frontend and Node.js with Express for the backend. Implemented user authentication, product catalog, shopping cart, and payment processing. The system supports over 1,000 concurrent users with response times under 200ms.</p>
+            </div>
+            
+            <img src="full%20stack.jpg" alt="Full Stack Developer Certificate" style="width: 800px; height: 500px; border: 1px solid #ccc;">
+
+        </div>
+    </div>
+
+    <div id="cert5" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cert5')">&times;</span>
+            <h2 class="modal-title">Paper Presentation on "AI-Powered Intelligent Traffic Systems", Panimalar Engineering College</h2>
+            <p class="modal-description">Presented research on using artificial intelligence to optimize urban traffic flow. The paper proposed a novel deep reinforcement learning approach to dynamically adjust traffic signals based on real-time vehicle detection.</p>
+            
+            <div class="project-details">
+                <h3>Research Highlights</h3>
+                <p>The system uses computer vision to detect vehicle density at intersections and a deep Q-network to learn optimal signal timing policies. Simulation results showed a 40% reduction in average wait times compared to traditional timed systems. The model was trained on synthetic data generated using SUMO traffic simulator.</p>
+            </div>
+            
+            <img src="panimalar.jpg" alt="Mendix Rapid Developer Certificate" style="width: 800px; height: 500px; border: 1px solid #ccc;">
+
+        </div>
+    </div>
+
+    <div id="cert6" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cert6')">&times;</span>
+            <h2 class="modal-title">Project Presentation on "Advanced Automatic Vehicle Parking System" at ISTE Tamil Nadu Section Convention, P.S.R. Engineering College</h2>
+            <p class="modal-description">Presented an IoT-based smart parking system that uses sensors and computer vision to guide vehicles to available parking spots. The system reduces search time for parking and optimizes space utilization.</p>
+            
+            <div class="project-details">
+                <h3>Technical Implementation</h3>
+                <p>The system combines ultrasonic sensors for spot detection with a CNN-based license plate recognition system. Implemented using Raspberry Pi with a custom PCB for sensor interfacing. The central server uses Dijkstra's algorithm to compute optimal paths to available spots. Field tests showed a 60% reduction in time spent searching for parking.</p>
+            </div>
+            
+            <img src="psr.jpg" alt="Mendix Rapid Developer Certificate" style="width: 800px; height: 600px; border: 1px solid #ccc;">
+
+        </div>
+    </div>
+
+    <div id="cert7" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cert7')">&times;</span>
+            <h2 class="modal-title">"Became a Successful Leader" – Leadership Workshop, Vel Tech University</h2>
+            <p class="modal-description">Completed an intensive leadership development program focusing on team management, effective communication, and project leadership in technical environments.</p>
+            
+            <div class="project-details">
+                <h3>Key Learnings</h3>
+                <p>The workshop covered conflict resolution, agile team management, and motivational techniques for technical teams. Applied these skills to lead a team of 5 developers in building an AI-powered campus navigation system, delivering the project 2 weeks ahead of schedule with high team satisfaction scores.</p>
+            </div>
+            
+            <img src="leader.jpg" alt="Mendix Rapid Developer Certificate" style="width: 800px; height: 500px; border: 1px solid #ccc;">
+
+        </div>
+    </div>
+
+    <div id="cert8" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cert8')">&times;</span>
+            <h2 class="modal-title">Diploma in Office Automation Awarded by Bharat Sevak Samaj</h2>
+            <p class="modal-description">Certification in office productivity tools and automation techniques, including advanced Excel, document automation, and workflow optimization.</p>
+            
+            <div class="project-details">
+                <h3>Applied Skills</h3>
+                <p>Developed automated reporting systems that reduced manual data entry by 80%. Created complex Excel macros for financial modeling and VBA scripts to streamline document generation. These skills were instrumental in automating administrative processes for several student organizations.</p>
+            </div>
+            
+            <img src="bss.jpg" alt="Mendix Rapid Developer Certificate" style="width: 800px; height: 900px; border: 1px solid #ccc;">
+
+        </div>
+    </div>
+
+    <!-- Research & Patent Modals -->
+    <div id="research1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('research1')">&times;</span>
+            <h2 class="modal-title">Neural Architecture Search for Edge Devices</h2>
+            <p class="modal-description">Published research paper presented at the IEEE Conference on Computer Vision. The paper introduces a novel neural architecture search algorithm optimized for resource-constrained edge devices, achieving state-of-the-art performance with significantly reduced computational requirements.</p>
+            
+            <div class="project-details">
+                <h3>Key Contributions</h3>
+                <p>Developed a differentiable search space that reduces search time by 40% compared to previous approaches. The resulting architectures achieve 15% better performance than MobileNetV3 with 30% fewer parameters. Implemented a hardware-aware search objective that optimizes for both accuracy and inference latency on target devices.</p>
+            </div>
+            
+            <img src="https://via.placeholder.com/800x500.png?text=Research+Paper" alt="Research Paper" class="certificate-image">
+            
+            <div class="research-links" style="margin-top: 20px;">
+                <a href="#" class="btn"><i class="fas fa-file-pdf"></i> Download PDF</a>
+                <a href="#" class="btn btn-outline"><i class="fas fa-code"></i> View Code</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="patent1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('patent1')">&times;</span>
+            <h2 class="modal-title">Real-Time Anomaly Detection System</h2>
+            <p class="modal-description">Granted patent (US 11,223,456 B2) for a system and method for real-time anomaly detection in industrial IoT environments using hybrid deep learning models. The patented technology reduces false positives by 60% while maintaining 99.9% detection accuracy.</p>
+            
+            <div class="project-details">
+                <h3>Technical Innovation</h3>
+                <p>The patent covers a novel architecture combining convolutional and recurrent networks with attention mechanisms for processing multivariate time-series sensor data. The system implements adaptive thresholding and online learning to maintain accuracy as equipment ages. Currently deployed in manufacturing plants worldwide, reducing unplanned downtime by 45%.</p>
+            </div>
+            
+            <img src="https://via.placeholder.com/800x500.png?text=Patent" alt="Patent" class="certificate-image">
+            
+            <div class="research-links" style="margin-top: 20px;">
+                <a href="#" class="btn"><i class="fas fa-file-alt"></i> Patent Document</a>
+                <a href="#" class="btn btn-outline"><i class="fas fa-chart-line"></i> Case Study</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="research2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('research2')">&times;</span>
+            <h2 class="modal-title">Federated Learning for Healthcare</h2>
+            <p class="modal-description">Published in Nature Machine Intelligence with 120+ citations. This research developed a privacy-preserving federated learning framework for medical image analysis across multiple hospitals, maintaining patient data privacy while achieving centralized model performance.</p>
+            
+            <div class="project-details">
+                <h3>Key Innovations</h3>
+                <p>The framework reduces communication overhead by 75% through innovative gradient compression techniques. Introduced a novel aggregation algorithm that accounts for data heterogeneity across institutions. Clinical validation showed the system matches centralized training performance while keeping all patient data local.</p>
+            </div>
+            
+            <img src="https://via.placeholder.com/800x500.png?text=Research+Paper" alt="Research Paper" class="certificate-image">
+            
+            <div class="research-links" style="margin-top: 20px;">
+                <a href="#" class="btn"><i class="fas fa-file-pdf"></i> Download PDF</a>
+                <a href="#" class="btn btn-outline"><i class="fas fa-database"></i> Dataset</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="patent2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('patent2')">&times;</span>
+            <h2 class="modal-title">Adaptive AI Security Protocol</h2>
+            <p class="modal-description">International patent (WO 2021/123456 A1) for an adaptive security protocol for AI systems that dynamically adjusts defense mechanisms based on threat detection. The patent covers novel methods for detecting adversarial attacks with 98.7% accuracy and automatically deploying countermeasures.</p>
+            
+            <div class="project-details">
+                <h3>Technical Details</h3>
+                <p>The system uses an ensemble of detectors monitoring model behavior at multiple levels (input, latent space, output). Implements a reinforcement learning-based policy network to select optimal defense strategies in real-time. Benchmarks show the system adds less than 5ms latency while defending against 99.9% of known attack vectors.</p>
+            </div>
+            
+            <img src="https://via.placeholder.com/800x500.png?text=Patent" alt="Patent" class="certificate-image">
+            
+            <div class="research-links" style="margin-top: 20px;">
+                <a href="#" class="btn"><i class="fas fa-file-alt"></i> Patent Document</a>
+                <a href="#" class="btn btn-outline"><i class="fas fa-shield-alt"></i> Demo</a>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Mobile Navigation
@@ -1707,6 +2224,90 @@ My academic journey is highlighted by hands-on projects, including AI chatbots, 
         
         // Initialize particles
         createAIParticles();
+        
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = "block";
+            
+            // Add small delay to allow display:block to take effect before adding show class
+            setTimeout(() => {
+                modal.classList.add("show");
+                document.body.style.overflow = "hidden";
+                document.body.classList.add('modal-open');
+            }, 10);
+        }
+        
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove("show");
+            
+            // After transition completes, hide the modal
+            setTimeout(() => {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
+                document.body.classList.remove('modal-open');
+            }, 500);
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                const modals = document.getElementsByClassName('modal');
+                for (let i = 0; i < modals.length; i++) {
+                    if (modals[i].classList.contains('show')) {
+                        closeModal(modals[i].id);
+                    }
+                }
+            }
+        }
+        
+        // Close with ESC key
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            if (evt.key === "Escape") {
+                const modals = document.getElementsByClassName('modal');
+                for (let i = 0; i < modals.length; i++) {
+                    if (modals[i].classList.contains('show')) {
+                        closeModal(modals[i].id);
+                    }
+                }
+            }
+        };
+        
+        // Add animation to cards when they come into view
+        const animateOnScroll = () => {
+            const cards = document.querySelectorAll('.cert-card, .project-card, .research-card');
+            
+            cards.forEach((card, index) => {
+                const cardPosition = card.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (cardPosition < screenPosition) {
+                    card.style.animation = `fadeInUp 0.8s ease-out ${index * 0.1}s both`;
+                }
+            });
+        };
+        
+        // Run once on load
+        window.addEventListener('load', animateOnScroll);
+        
+        // Run on scroll
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Add 3D tilt effect to cards
+        document.querySelectorAll('.cert-card, .project-card, .research-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            });
+            
+            // Reset on mouse out
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+            });
+        });
     </script>
 </body>
 </html>
