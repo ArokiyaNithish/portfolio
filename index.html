@@ -165,6 +165,20 @@
         .hero-text h1 span {
             color: var(--accent);
         }
+
+        .typing {
+    font-family: monospace;
+    font-size: 2em;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0ch;                /* start with no characters shown */
+    animation: typing 4s steps(21) forwards; /* 21 steps = 21 characters */
+  }
+
+  @keyframes typing {
+    from { width: 0ch; }
+    to { width: 21ch; }        /* end with all 21 characters visible */
+  }
         
         .hero-text p {
             font-size: 1.2rem;
@@ -172,6 +186,23 @@
             color: var(--light);
             max-width: 600px;
             opacity: 0.8;
+        }
+
+        .hero-bio {
+            background: rgba(10, 25, 47, 0.5);
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px -15px rgba(0, 168, 255, 0.2);
+        }
+        
+        .hero-bio p {
+            font-size: 1.1rem;
+            margin: 0;
+            color: var(--light);
+            font-weight: 400;
         }
         
         .hero-image {
@@ -1365,8 +1396,13 @@
         <div id="vanta-background" class="data-vis"></div>
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Hi, I'm <span>Arokiya Nithish J</span></h1>
-                <p>AI Developer | Machine Learning Enthusiast | Gen AI | LLMS | Innovator | Research | Hackathons </p>
+                <br><br><br><BR>
+                <h1 class="typing" style="font-family: 'Dancing Script', cursive; font-size: 2.8rem;">Hi, I'm <span>𝐀𝐫𝐨𝐤𝐢𝐲𝐚 𝐍𝐢𝐭𝐡𝐢𝐬𝐡 𝐉</span></h1>
+                <p style="text-align: center;font-family: 'Times New Roman', Times, serif;font-size: 1.4rem;">AI Developer | AI Agent & Gen AI | ML Engineer <BR>  Data Scientist | Researcher & Innovation</p>
+                <div class="hero-bio">
+                    <p style="text-align: justify;">Expertise in AI, AI Agents, Generative AI, and Large Language Models, using advanced Machine Learning and research to innovate transformative real-world solutions and future.</p>
+                    <br><p style="text-align: center;">"The best way to predict the future is to invent it."<br> - Alan Kay</p>
+                </div>    
                 <div class="hero-buttons">
                     <a href="#projects" class="btn">View My Work</a>
                     <a href="#contact" class="btn btn-outline">Contact Me</a>
@@ -1512,7 +1548,7 @@
             
             <!-- Project 2 -->
             <div class="project-card glow-on-hover" onclick="openModal('project2')">
-                <img src="https://via.placeholder.com/600x400?text=Stock+Market+Predictor" alt="Stock Market Predictor" class="project-img">
+                <img src="full stack.jpg" alt="Stock Market Predictor" class="project-img" style="max-width: 100%; height: auto; border: 1px solid #ccc;"> 
                 <div class="project-info">
                     <h3>Stock Prediction Model</h3>
                     <p>LSTM neural network that predicts stock market trends using historical data and sentiment analysis.</p>
